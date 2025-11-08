@@ -15,7 +15,7 @@ class RegisterController extends Controller
     // Menampilkan view register (resources/views/auth/register.blade.php)
     public function showRegistrationForm()
     {
-        return view('auth.register'); 
+        return view('registrasi'); 
     }
 
     // Memproses permintaan pendaftaran

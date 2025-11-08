@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     {{-- 1. MEMANGGIL ELEMEN HEAD (Pastikan ini menyertakan Tailwind CSS dan Font Awesome) --}}
-    @include('layouts.header') 
+    @include('layouts.head') 
     <title>MyPet - Perawatan Terbaik untuk Hewan Kesayangan</title>
 </head>
 <body class="bg-gray-50">
@@ -51,7 +51,7 @@
             <div class="text-center max-w-3xl mx-auto">
                 <h2 class="text-3xl font-bold text-gray-800 mb-3">Tentang MyPet</h2>
                 <p class="text-gray-600 text-lg">
-                    Kami adalah penyedia layanan **grooming hewan terpercaya** dengan pengalaman lebih dari 10 tahun. Komitmen kami adalah memberikan **perawatan terbaik** untuk hewan kesayangan Anda.
+                    Kami adalah penyedia layanan grooming hewan terpercaya dengan pengalaman lebih dari 10 tahun. Komitmen kami adalah memberikan perawatan terbaik untuk hewan kesayangan Anda.
                 </p>
             </div>
         </section>

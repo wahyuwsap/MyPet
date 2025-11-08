@@ -1,44 +1,41 @@
-{{-- 
-    Header ini dibuat 'absolute' agar menimpa gambar hero di dashboard/landing page.
-    'z-10' memastikannya berada di lapisan atas.
-    Warna disesuaikan menjadi putih (bg-white/90) agar sesuai dengan tampilan 'myPet' yang cerah.
---}}
-<header class="absolute top-0 left-0 right-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-200">
-    <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        
-        {{-- Logo myPet --}}
-        <a href="{{ url('/') }}" class="text-3xl font-extrabold">
-            {{-- Menggunakan warna biru #3b82f6 (blue-500) dan teks hitam untuk simulasi logo di gambar --}}
-            <span class="text-blue-500 italic font-serif">my</span><span class="text-gray-800 italic font-serif">Pet</span>
+{{-- resources/views/layouts/header.blade.php --}}
+<header class="bg-white shadow-sm">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-6">
+        {{-- Logo --}}
+        <a href="/" class="text-2xl font-bold text-blue-600">
+            My<span class="text-gray-800">Pet</span>
         </a>
-        
-        {{-- Navigasi Otomatis (Login/Daftar/Logout) --}}
-        <div class="flex items-center space-x-4">
-            
-            {{-- Jika user BELUM login: Tampilkan tombol Login dan Daftar --}}
+
+        {{-- Menu Navigasi --}}
+        <div class="flex items-center space-x-6">
+            {{-- Jika user belum login --}}
             @guest
-                {{-- Tombol Login (Teks) --}}
-                <a href="{{ route('login') }}" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                <a href="{{ route('login') }}" 
+                   class="text-gray-800 hover:text-blue-600 transition-colors font-medium">
                     Login
                 </a>
-                
-                {{-- Tombol Daftar (Biru, seperti pada gambar) --}}
-                <a href="{{ route('register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                <a href="{{ route('register') }}" 
+                   class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                     Daftar
                 </a>
             @endguest
 
-            {{-- Jika user SUDAH login: Tampilkan tombol Logout --}}
+            {{-- Jika user sudah login --}}
             @auth
-                {{-- Anda bisa menambahkan link ke Profil atau Dashboard di sini --}}
-                <a href="{{ route('dashboard') }}" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                <a href="{{ route('dashboard') }}" 
+                   class="{{ request()->routeIs('dashboard') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
+                          px-3 py-2 rounded-lg text-sm font-medium transition-colors">
                     Dashboard
                 </a>
-
-                {{-- Form Logout --}}
+                <a href="{{ route('bookings.index') }}" 
+                   class="{{ request()->routeIs('bookings.*') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
+                          px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Booking
+                </a>
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
-                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    <button type="submit" 
+                        class="text-red-600 hover:text-red-700 font-medium transition-colors">
                         Logout
                     </button>
                 </form>
