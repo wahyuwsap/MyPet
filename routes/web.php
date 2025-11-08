@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController; // Jika Anda sudah membuat ini
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BookingController;
 
 // --- Rute Autentikasi Manual ---
 
@@ -49,3 +50,4 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::resource('services', ServiceController::class);
+Route::resource('bookings', BookingController::class);
