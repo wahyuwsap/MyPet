@@ -15,7 +15,7 @@ use App\Http\Controllers\DashboardController; // Asumsi: untuk halaman setelah l
 // Halaman utama (sebelum login)
 Route::get('/', function () {
     // Panggil view yang berisi kode landing page (misalnya: welcome.blade.php)
-    return view('welcome'); 
+    return view('auth.login'); 
 })->name('home');
 
 // Registrasi
@@ -26,7 +26,7 @@ Route::post('/register', [AuthController::class, 'store'])->name('register.store
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Route Akses Terautentikasi (Authenticated)
@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('create', [BookingController::class, 'create'])->name('create'); 
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
     
+    // 3. Profile (CRUD User)
+    Route::get('/profile', [AuthController::class, 'editProfile'])->name('profile.edit');
+    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
+
     // 3. Logout (Dipicu oleh Form POST tersembunyi)
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 

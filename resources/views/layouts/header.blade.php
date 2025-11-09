@@ -2,9 +2,17 @@
 <header class="bg-white shadow-sm">
     <nav class="container mx-auto flex justify-between items-center py-4 px-6">
         {{-- Logo --}}
-        <a href="/" class="text-2xl font-bold text-blue-600">
-            My<span class="text-gray-800">Pet</span>
-        </a>
+        @auth
+            {{-- Jika sudah login, logo mengarah ke dashboard --}}
+            <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-blue-600">
+                My<span class="text-gray-800">Pet</span>
+            </a>
+        @else
+            {{-- Jika belum login, logo mengarah ke halaman utama --}}
+            <a href="{{ route('home') }}" class="text-2xl font-bold text-blue-600">
+                My<span class="text-gray-800">Pet</span>
+            </a>
+        @endauth
 
         {{-- Menu Navigasi --}}
         <div class="flex items-center space-x-6">
@@ -26,6 +34,12 @@
                    class="{{ request()->routeIs('dashboard') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
                           px-3 py-2 rounded-lg text-sm font-medium transition-colors">
                     Dashboard
+                </a>
+                {{-- Menu Profile --}}
+                <a href="{{ route('profile.edit') }}" 
+                   class="{{ request()->routeIs('profile.edit') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
+                          px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Profil
                 </a>
                 <!-- <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
