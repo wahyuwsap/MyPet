@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController; // Untuk Registrasi, Login, Logout
 use App\Http\Controllers\BookingController; // Untuk Formulir Booking
 use App\Http\Controllers\DashboardController; // Asumsi: untuk halaman setelah login
-use App\Http\Controllers\JadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,9 +50,5 @@ Route::middleware('auth')->group(function () {
 
     // 3. Logout (Dipicu oleh Form POST tersembunyi)
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
-
-    Route::prefix('admin')->group(function () {
-        Route::resource('jadwal', JadwalController::class);
-    });
 
 });
