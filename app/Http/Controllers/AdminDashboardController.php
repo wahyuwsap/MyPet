@@ -15,6 +15,7 @@ class AdminDashboardController extends Controller
         $totalServices = Service::count();
         $totalBookings = Booking::count();
 
+        // Pastikan view 'admin.dashboard' ada
         return view('admin.dashboard', compact('totalUsers', 'totalServices', 'totalBookings'));
     }
 }
