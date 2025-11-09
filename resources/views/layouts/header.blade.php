@@ -3,10 +3,16 @@
     <nav class="container mx-auto flex justify-between items-center py-4 px-6">
         {{-- Logo --}}
         @auth
-            {{-- Jika sudah login, logo mengarah ke dashboard --}}
-            <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-blue-600">
-                My<span class="text-gray-800">Pet</span>
-            </a>
+            {{-- Jika sudah login, logo mengarah sesuai role --}}
+            @if(auth()->user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}" class="text-2xl font-bold text-blue-600">
+                    My<span class="text-gray-800">Pet</span>
+                </a>
+            @else
+                <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-blue-600">
+                    My<span class="text-gray-800">Pet</span>
+                </a>
+            @endif
         @else
             {{-- Jika belum login, logo mengarah ke halaman utama --}}
             <a href="{{ route('home') }}" class="text-2xl font-bold text-blue-600">
@@ -30,56 +36,50 @@
 
             {{-- Jika user sudah login --}}
             @auth
-                <a href="{{ route('dashboard') }}" 
-                   class="{{ request()->routeIs('dashboard') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
-                          px-3 py-2 rounded-lg text-sm font-medium transition-colors">
-                    Dashboard
-                </a>
-                {{-- Menu Profile --}}
+                {{-- Link Dashboard sesuai role --}}
+                @if(auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" 
+                       class="{{ request()->routeIs('admin.dashboard') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
+                              px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('dashboard') }}" 
+                       class="{{ request()->routeIs('dashboard') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
+                              px-3 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Dashboard
+                    </a>
+                @endif
+
+                {{-- Menu Profil --}}
                 <a href="{{ route('profile.edit') }}" 
                    class="{{ request()->routeIs('profile.edit') ? 'bg-blue-100 text-blue-700' : 'text-gray-800 hover:text-blue-600' }} 
                           px-3 py-2 rounded-lg text-sm font-medium transition-colors">
                     Profil
                 </a>
-                <!-- <form action="{{ route('logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" tq    
-                        class="text-red-600 hover:text-red-700 font-medium transition-colors">
-                        Logout
-                    </button>
-                </form> -->
-            @endauth
 
-            @auth
-            {{-- Tombol Logout --}}
+                {{-- Tombol Logout --}}
                 <a href="#" 
                     id="logout-link" 
-                    class="nav-link font-medium hover:text-red-600 transition duration-150">
+                    class="font-medium hover:text-red-600 transition duration-150">
                     Logout
-            </a>
-            
-            {{-- Formulir Logout Tersembunyi --}}
-            {{-- Kita perlu form POST karena Laravel mewajibkan CSRF Token untuk Logout --}}
+                </a>
+
+                {{-- Form Logout tersembunyi --}}
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-             @endauth
-
-             <script>
-                document.getElementById('logout-link').addEventListener('click', function(event) {
-                    // Mencegah navigasi langsung
-                    event.preventDefault(); 
-                    
-                    // Menampilkan pop-up konfirmasi
-                    const confirmation = confirm('Apakah Anda yakin ingin logout?'); 
-
-                    if (confirmation) {
-                        // Jika pengguna menekan 'OK', kirimkan form POST yang tersembunyi
-                        document.getElementById('logout-form').submit();
-                    }
-                    // Jika pengguna menekan 'Cancel', tidak terjadi apa-apa
-                });
-            </script>
+            @endauth
         </div>
     </nav>
 </header>
+
+{{-- Script Logout --}}
+<script>
+    document.getElementById('logout-link')?.addEventListener('click', function(event) {
+        event.preventDefault();
+        if (confirm('Apakah Anda yakin ingin logout?')) {
+            document.getElementById('logout-form').submit();
+        }
+    });
+</script>

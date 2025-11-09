@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DashboardController; // Asumsi: untuk halaman setelah login
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,14 +53,23 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 
     // Grup route khusus untuk Admin
-    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::resource('jadwal', JadwalController::class);
+   Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard Admin
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        // Rute untuk Manajemen User
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    // CRUD Jadwal
+    Route::resource('jadwal', JadwalController::class);
+
+    // CRUD Service
+    Route::resource('services', ServiceController::class);
+
+    Route::resource('bookings', BookingController::class);
+
+    // Manajemen User
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/edit', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
     });
+
 
 });

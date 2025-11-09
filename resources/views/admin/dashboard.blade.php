@@ -1,36 +1,107 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    {{-- Include Head Layout --}}
+    @include('layouts.head')
+    <title>Dashboard Admin - MyPet</title>
+</head>
 
-@section('content')
-<div class="container mt-5">
-    <h2 class="mb-4 text-center">Admin Dashboard</h2>
+<body class="bg-gray-50">
+    {{-- Header Navigasi --}}
+    @include('layouts.header')
 
-    <div class="row justify-content-center">
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">Total Users</h5>
-                    <h3>{{ $totalUsers }}</h3>
-                </div>
+    {{-- HERO SECTION (Dashboard Admin) --}}
+<section class="relative h-[22vh] flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-400">
+    <div class="absolute inset-0 bg-blue-700/50"></div>
+    <div class="relative z-10 text-center text-white px-4">
+        <h1 class="text-2xl md:text-3xl font-bold mb-1">Dashboard Admin</h1>
+        <p class="text-gray-100 text-sm md:text-base max-w-2xl mx-auto">
+            Kelola semua data pengguna, layanan, jadwal, dan booking di sistem MyPet.
+        </p>
+    </div>
+</section>
+
+    {{-- KONTEN UTAMA --}}
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        {{-- SECTION: STATISTIK SISTEM --}}
+<section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Statistik Sistem</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {{-- Total Pengguna --}}
+        <div class="bg-blue-50 border-t-4 border-blue-500 rounded-xl shadow-md p-6 text-center">
+            <div class="inline-flex p-3 bg-blue-100 rounded-full text-blue-600 mb-3">
+                <i class="fas fa-users text-2xl"></i>
             </div>
+            <h3 class="text-gray-700 font-semibold text-lg mb-1">Total Pengguna</h3>
+            <p class="text-3xl font-bold text-blue-600">128</p>
         </div>
 
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title text-success">Total Services</h5>
-                    <h3>{{ $totalServices }}</h3>
-                </div>
+        {{-- Total Jadwal --}}
+        <div class="bg-blue-50 border-t-4 border-blue-500 rounded-xl shadow-md p-6 text-center">
+            <div class="inline-flex p-3 bg-blue-100 rounded-full text-blue-600 mb-3">
+                <i class="fas fa-calendar-alt text-2xl"></i>
             </div>
+            <h3 class="text-gray-700 font-semibold text-lg mb-1">Total Jadwal</h3>
+            <p class="text-3xl font-bold text-blue-600">42</p>
         </div>
 
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title text-warning">Total Bookings</h5>
-                    <h3>{{ $totalBookings }}</h3>
-                </div>
+        {{-- Total Booking --}}
+        <div class="bg-blue-50 border-t-4 border-blue-500 rounded-xl shadow-md p-6 text-center">
+            <div class="inline-flex p-3 bg-blue-100 rounded-full text-blue-600 mb-3">
+                <i class="fas fa-book text-2xl"></i>
             </div>
+            <h3 class="text-gray-700 font-semibold text-lg mb-1">Total Booking</h3>
+            <p class="text-3xl font-bold text-blue-600">65</p>
+        </div>
+
+        {{-- Total Layanan --}}
+        <div class="bg-blue-50 border-t-4 border-blue-500 rounded-xl shadow-md p-6 text-center">
+            <div class="inline-flex p-3 bg-blue-100 rounded-full text-blue-600 mb-3">
+                <i class="fas fa-cogs text-2xl"></i>
+            </div>
+            <h3 class="text-gray-700 font-semibold text-lg mb-1">Total Layanan</h3>
+            <p class="text-3xl font-bold text-blue-600">8</p>
         </div>
     </div>
-</div>
-@endsection
+</section>
+
+{{-- SECTION: AKSI CEPAT --}}
+<section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Aksi Cepat</h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {{-- Kelola Pengguna --}}
+        <a href="{{ route('admin.users.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
+            <i class="fas fa-user-cog text-3xl mb-3"></i>
+            <span class="font-semibold">Kelola Pengguna</span>
+        </a>
+
+        {{-- Kelola Jadwal --}}
+        <a href="{{ route('admin.jadwal.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
+            <i class="fas fa-calendar text-3xl mb-3"></i>
+            <span class="font-semibold">Kelola Jadwal</span>
+        </a>
+
+        {{-- Kelola Booking --}}
+        <a href="{{ route('admin.bookings.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
+            <i class="fas fa-book text-3xl mb-3"></i>
+            <span class="font-semibold">Kelola Booking</span>
+        </a>
+
+        {{-- Kelola Layanan --}}
+        <a href="{{ route('admin.services.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
+            <i class="fas fa-tools text-3xl mb-3"></i>
+            <span class="font-semibold">Kelola Layanan</span>
+        </a>
+    </div>
+</section>
+
+    </main>
+
+    {{-- Footer --}}
+    @include('layouts.footer')
+
+</body>
+</html>
