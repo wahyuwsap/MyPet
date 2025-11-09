@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController; // Untuk Registrasi, Login, Logout
 use App\Http\Controllers\BookingController; // Untuk Formulir Booking
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DashboardController; // Asumsi: untuk halaman setelah login
 
