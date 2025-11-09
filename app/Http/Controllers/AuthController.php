@@ -69,13 +69,15 @@ use App\Models\User;
 
         // Logout
         public function logout(Request $request)
-    {
-        Auth::logout();
+        {
+            Auth::logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        // 🟢 UBAH BAGIAN INI: Arahkan ke root URL (/)
-        return redirect('/')->with('success', 'Berhasil logout.'); 
-    }
+            // 🟢 UBAH BAGIAN INI: Arahkan ke root URL (/)
+            return redirect('/')->with('success', 'Berhasil logout.'); 
+        }
+        
+        
 }

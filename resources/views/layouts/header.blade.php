@@ -29,7 +29,7 @@
                 </a>
                 <!-- <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
-                    <button type="submit" 
+                    <button type="submit" tq    
                         class="text-red-600 hover:text-red-700 font-medium transition-colors">
                         Logout
                     </button>

@@ -12,16 +12,22 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique();    // Kolom ini digunakan untuk registrasi
+            $table->string('username')->unique();
             $table->string('nama_lengkap');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('no_telepon', 15);
             $table->text('alamat');
+            $table->string('role')->default('pengguna'); 
+            
             $table->rememberToken();
             $table->timestamps();
         });
     }
-    // ... (fungsi down)
+    
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+    }
 };
