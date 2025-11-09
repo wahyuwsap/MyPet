@@ -1,44 +1,53 @@
 <?php
 
-// app/Http/Controllers/Auth/RegisterController.php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User; // Penting: Pastikan Anda mengimpor Model User
+use App\Models\User;
 
 class RegisterController extends Controller
 {
-    // Menampilkan view register (resources/views/auth/register.blade.php)
+    /**
+     * Menampilkan halaman registrasi
+     */
     public function showRegistrationForm()
     {
-        return view('registrasi'); 
+        // Pastikan view 'registrasi.blade.php' ada di resources/views/
+        return view('registrasi');
     }
 
-    // Memproses permintaan pendaftaran
+    /**
+     * Memproses data pendaftaran user baru
+     */
     public function register(Request $request)
     {
-        // Validasi Input
+        // ✅ Validasi input sesuai kolom tabel users
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'], // 'confirmed' membutuhkan field password_confirmation
+            'username' => ['required', 'string', 'max:255', 'unique:users,username'],
+            'nama_lengkap' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'no_telepon' => ['required', 'string', 'max:15'],
+            'alamat' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'], // Gunakan field 'password_confirmation' di form
         ]);
 
-        // Membuat User Baru dan otomatis mengenkripsi password
+        // ✅ Membuat user baru & mengenkripsi password
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Enkripsi password WAJIB (Memenuhi kriteria Enkripsi Data)
+            'username'     => $request->username,
+            'nama_lengkap' => $request->nama_lengkap,
+            'email'        => $request->email,
+            'no_telepon'   => $request->no_telepon,
+            'alamat'       => $request->alamat,
+            'password'     => Hash::make($request->password),
         ]);
 
-        // Otomatis login setelah register berhasil
+        // ✅ Login otomatis setelah register
         Auth::login($user);
 
-        // Redirect ke dashboard
-        return redirect(route('dashboard'));
+        // ✅ Redirect ke dashboard (pastikan route 'dashboard' sudah ada)
+        return redirect()->route('dashboard')->with('success', 'Pendaftaran berhasil! Selamat datang di MyPet 🐾');
     }
 }

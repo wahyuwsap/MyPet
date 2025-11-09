@@ -34,7 +34,7 @@
                     </div>
                     <p class="text-sm text-gray-500 mb-4">Jadwalkan appointment</p>
                 </div>
-                <a href="{{ route('booking.create') }}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-center transition-colors">
+                <a href="{{ route('create') }}" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-center transition-colors">
                     Buat Booking
                 </a>
             </div>

@@ -7,65 +7,75 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
-class AuthController extends Controller
-{
-    // 🔹 Tampilkan form register
-    public function showRegisterForm()
+    class AuthController extends Controller
     {
-        return view('auth.registrasi');
-    }
-
-    // 🔹 Proses register
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        // Simpan user baru
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
-
-    // 🔹 Tampilkan form login
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    // 🔹 Proses login
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard')->with('success', 'Login berhasil!');
+        // Tampilkan form register
+        public function showRegisterForm()
+        {
+            return view('auth.registrasi');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ])->onlyInput('email');
-    }
+        // Proses register (store)
+        public function store(Request $request)
+        {
+            $request->validate([
+                'username' => 'required|string|max:255|unique:users,username',
+                'nama_lengkap' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email',
+                'password' => 'required|string|min:8|confirmed',
+                'no_telepon' => 'required|string|max:15',
+                'alamat' => 'required|string',
+            ]);
 
-    // 🔹 Logout
-    public function logout(Request $request)
+            User::create([
+                'username' => $request->username,
+                'nama_lengkap' => $request->nama_lengkap,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'no_telepon' => $request->no_telepon,
+                'alamat' => $request->alamat,
+            ]);
+
+            // 🟢 Setelah registrasi, arahkan ke halaman login
+           return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
+
+        }
+
+        // Tampilkan form login
+        public function showLoginForm()
+        {
+            return view('auth.login');
+        }
+
+        // Proses login (pakai username)
+        public function login(Request $request)
+        {
+            $request->validate([
+                'username' => 'required|string',
+                'password' => 'required|string',
+            ]);
+
+            $credentials = $request->only('username', 'password');
+
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->route('dashboard')->with('success', 'Selamat datang di MyPet!');
+            }
+
+            return back()->withErrors([
+                'loginError' => 'Login Gagal! Username atau password salah.',
+            ])->withInput();
+        }
+
+        // Logout
+        public function logout(Request $request)
     {
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', 'Berhasil logout.');
+        // 🟢 UBAH BAGIAN INI: Arahkan ke root URL (/)
+        return redirect('/')->with('success', 'Berhasil logout.'); 
     }
 }

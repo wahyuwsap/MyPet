@@ -100,7 +100,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 
                 {{-- Layanan 1: Grooming Anjing --}}
-                <a href="{{ route('bookings.create') }}" class="block group">
+                <a href="{{ route('create') }}" class="block group">
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="https://placehold.co/600x400/81C784/FFF?text=Grooming+Anjing" alt="Grooming Anjing" class="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-300">
                         <div class="p-4">
@@ -111,7 +111,7 @@
                 </a>
                 
                 {{-- Layanan 2: Grooming Kucing --}}
-                <a href="{{ route('bookings.create') }}" class="block group">
+                <a href="{{ route('create') }}" class="block group">
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="https://placehold.co/600x400/9FA8DA/FFF?text=Grooming+Kucing" alt="Grooming Kucing" class="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-300">
                         <div class="p-4">
@@ -122,7 +122,7 @@
                 </a>
                 
                 {{-- Layanan 3: Perawatan Kuku --}}
-                <a href="{{ route('bookings.create') }}" class="block group">
+                <a href="{{ route('create') }}" class="block group">
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="https://placehold.co/600x400/A5D6A7/FFF?text=Perawatan+Kuku" alt="Perawatan Kuku" class="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-300">
                         <div class="p-4">
@@ -133,7 +133,7 @@
                 </a>
                 
                 {{-- Layanan 4: Mandi & Spa --}}
-                <a href="{{ route('bookings.create') }}" class="block group">
+                <a href="{{ route('create') }}" class="block group">
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <img src="https://placehold.co/600x400/C5CAE9/FFF?text=Mandi+&+Spa" alt="Mandi & Spa" class="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-300">
                         <div class="p-4">

@@ -23,12 +23,5 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
-    /**
-     * Balikkan (rollback) migrasi.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
-    }
+    // ... (fungsi down)
 };
