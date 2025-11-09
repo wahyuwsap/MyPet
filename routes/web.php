@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController; // Untuk Registrasi, Login, Logout
 use App\Http\Controllers\BookingController; // Untuk Formulir Booking
-use App\Http\Controllers\DashboardController; // Untuk Dashboard User
-use App\Http\Controllers\AdminDashboardController; // Untuk Dashboard Admin
+use App\Http\Controllers\DashboardController; // Asumsi: untuk halaman setelah login
+use App\Http\Controllers\JadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +48,10 @@ Route::middleware('auth')->group(function () {
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
+
+    Route::prefix('admin')->group(function () {
+        Route::resource('jadwal', JadwalController::class);
+    });
 
     // Dashboard Admin (tetap dalam auth agar hanya bisa diakses user login)
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
