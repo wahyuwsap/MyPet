@@ -68,39 +68,34 @@
         </section>
 
         {{-- SECTION: AKSI CEPAT --}}
-        <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Aksi Cepat</h2>
+<section class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Aksi Cepat</h2>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {{-- Kelola Pengguna --}}
-                <a href="{{ route('admin.users.index') }}" 
-                   class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
-                    <i class="fas fa-user-cog text-3xl mb-3"></i>
-                    <span class="font-semibold">Kelola Pengguna</span>
-                </a>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <a href="{{ route('admin.services.index') }}"
+           class="bg-blue-600 hover:bg-blue-700 text-white text-center py-4 rounded-xl shadow-lg transition">
+            Kelola Layanan
+        </a>
 
-                {{-- Kelola Jadwal --}}
-                <a href="{{ route('admin.jadwal.index') }}" 
-                   class="bg-green-600 hover:bg-green-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
-                    <i class="fas fa-calendar text-3xl mb-3"></i>
-                    <span class="font-semibold">Kelola Jadwal</span>
-                </a>
+        <a href="{{ route('admin.jadwal.index') }}"
+           class="bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-xl shadow-lg transition">
+            Kelola Jadwal
+        </a>
 
-                {{-- Kelola Booking --}}
-                <a href="{{ route('admin.bookings.index') }}" 
-                   class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
-                    <i class="fas fa-book text-3xl mb-3"></i>
-                    <span class="font-semibold">Kelola Booking</span>
-                </a>
+        <a href="{{ route('admin.bookings.index') }}"
+           class="bg-yellow-600 hover:bg-yellow-700 text-white text-center py-4 rounded-xl shadow-lg transition">
+            Kelola Booking
+        </a>
 
-                {{-- Kelola Layanan --}}
-                <a href="{{ route('admin.services.index') }}" 
-                   class="bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-md p-5 flex flex-col items-center transition">
-                    <i class="fas fa-tools text-3xl mb-3"></i>
-                    <span class="font-semibold">Kelola Layanan</span>
-                </a>
-            </div>
-        </section>
+        <a href="{{ route('admin.users.index') }}"
+           class="bg-purple-600 hover:bg-purple-700 text-white text-center py-4 rounded-xl shadow-lg transition">
+            Kelola Users
+        </a>
+
+    </div>
+</section>
+
 
     </main>
 

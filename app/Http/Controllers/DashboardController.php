@@ -11,9 +11,9 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function admin()
     {
-        // Pastikan Anda memiliki file view di resources/views/dashboard/index.blade.php
-        return view('dashboard'); 
+        return view('admin.dashboard');
     }
+
 }

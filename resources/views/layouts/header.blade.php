@@ -4,14 +4,14 @@
         {{-- Logo --}}
         @auth
             {{-- Jika sudah login, logo mengarah sesuai role --}}
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('admin.dashboard') }}" class="text-2xl font-bold text-blue-600">
-                    My<span class="text-gray-800">Pet</span>
-                </a>
+            @if (auth()->user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}" class="text-2xl font-bold text-blue-600">
+            My<span class="text-gray-800">Pet</span>
+            </a>
             @else
-                <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-blue-600">
-                    My<span class="text-gray-800">Pet</span>
-                </a>
+            <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-blue-600">
+            My<span class="text-gray-800">Pet</span>
+            </a>
             @endif
         @else
             {{-- Jika belum login, logo mengarah ke halaman utama --}}

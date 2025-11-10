@@ -57,28 +57,30 @@ class AuthController extends Controller
      * Menangani proses login.
      */
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
+{
+    $request->validate([
+        'username' => 'required',
+        'password' => 'required',
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    $credentials = $request->only('username', 'password');
 
-            // Cek role setelah login
-            if (Auth::user()->role == 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-            // Redirect ke dashboard user biasa
-            return redirect()->intended(route('dashboard'));
+        // Cek role user
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard')->with('success', 'Selamat datang Admin!');
         }
 
-        return back()->withErrors([
-            'username' => 'Username atau password yang Anda masukkan salah.',
-        ])->onlyInput('username');
+        // Jika role bukan admin (pengguna biasa)
+        return redirect()->route('dashboard')->with('success', 'Login berhasil!');
     }
+
+    return back()->withErrors([
+        'login' => 'Username atau password salah.',
+    ]);
+}
 
     /**
      * Menangani proses logout.

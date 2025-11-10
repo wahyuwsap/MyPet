@@ -58,24 +58,25 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     | Semua route di bawah prefix "admin/" hanya bisa diakses admin
     */
-    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-        
-        // Dashboard Admin
-        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::middleware(['auth', 'checkRole:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-        // Manajemen Jadwal
-        Route::resource('jadwal', JadwalController::class);
+        Route::get('/dashboard', [DashboardController::class, 'admin'])->name('dashboard');
 
-        // Manajemen Layanan (Service)
+        // ✅ Service (sudah benar)
         Route::resource('services', ServiceController::class);
 
-        // Manajemen Booking
+        // ✅ Jadwal (TAMBAHKAN INI)
+        Route::resource('jadwal', JadwalController::class);
+
+        // ✅ Booking (TAMBAHKAN INI)
         Route::resource('bookings', BookingController::class);
 
-        // Manajemen User
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        // ✅ USERS (ubah dari yang sebelumnya menjadi resource agar route admin.users.index ada)
+        Route::resource('users', UserController::class);
     });
+
 
 });
