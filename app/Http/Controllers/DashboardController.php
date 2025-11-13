@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Menampilkan halaman dashboard setelah login.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function admin()
+    public function index()
     {
-        return view('admin.dashboard');
+        return view('layouts.dashboard');
     }
-
 }

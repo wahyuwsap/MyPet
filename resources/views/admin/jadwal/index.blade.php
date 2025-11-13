@@ -4,9 +4,10 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Daftar Jadwal</h2>
-        <a href="{{ route('jadwal.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.jadwal.create') }}" class="btn btn-primary">
             + Tambah Jadwal
         </a>
+
     </div>
 
     {{-- Notifikasi sukses --}}
