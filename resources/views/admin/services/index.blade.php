@@ -62,8 +62,8 @@
                         @forelse($services as $index => $service)
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-4 px-6 text-sm text-gray-900">{{ $loop->iteration }}</td>
-                            <td class="py-4 px-6 text-sm text-gray-800 font-medium">{{ $service->nama_layanan }}</td>
-                            <td class="py-4 px-6 text-sm text-gray-700">Rp {{ number_format($service->harga, 0, ',', '.') }}</td>
+                            <td class="py-4 px-6 text-sm text-gray-800 font-medium">{{ $service->name }}</td>
+                            <td class="py-4 px-6 text-sm text-gray-700">Rp {{ number_format($service->price, 0, ',', '.') }}</td>
                             <td class="py-4 px-6 text-center text-sm font-medium">
                                 <a href="{{ route('admin.services.edit', $service->id) }}" class="text-indigo-600 hover:text-indigo-800 transition mr-4"><i class="fas fa-edit mr-1"></i>Edit</a>
                                 <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus layanan ini?');">
