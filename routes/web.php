@@ -32,9 +32,9 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 /*
 |--------------------------------------------------------------------------
 | Authenticated (user)
-|--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 */
-Route::middleware('Controllers')->group(function () {
+Route::middleware('auth')->group(function () {
     // user dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
