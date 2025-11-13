@@ -11,8 +11,8 @@ class JadwalController extends Controller
     public function index()
     {
         // Ambil semua jadwal dari database
-        $jadwals = Jadwal::all();
-
+        $jadwals = Jadwal::latest()->get();
+ 
         // Kirim ke view
         return view('admin.jadwal.index', compact('jadwals'));
     }
@@ -25,9 +25,10 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hari' => 'required|string',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'hari' => 'required|string|max:255',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+            'kegiatan' => 'required|string|max:255',
         ]);
 
         Jadwal::create($request->all());
@@ -44,9 +45,10 @@ class JadwalController extends Controller
     public function update(Request $request, Jadwal $jadwal)
     {
         $request->validate([
-            'hari' => 'required|string',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
+            'hari' => 'required|string|max:255',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
+            'kegiatan' => 'required|string|max:255',
         ]);
 
         $jadwal->update($request->all());

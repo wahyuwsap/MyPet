@@ -10,11 +10,9 @@ class Jadwal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service',
-        'tanggal',
-        'waktu',
-        'kuota',
-        'booked',
-        'status',
+        'hari',
+        'jam_mulai',
+        'jam_selesai',
+        'kegiatan',
     ];
 }

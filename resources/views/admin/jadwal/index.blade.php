@@ -61,7 +61,7 @@
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-4 px-6 text-sm text-gray-800 font-medium">{{ $jadwal->hari }}</td>
                             <td class="py-4 px-6 text-sm text-gray-700">{{ \Carbon\Carbon::parse($jadwal->jam_mulai)->format('H:i') }}</td>
-                            <td class="py-4 px-6 text-sm text-gray-700">{{ \Carbon\Carbon::parse($jadwal->jam_selesai)->format('H:i') }}</td>
+                            <td class="py-4 px-6 text-sm text-gray-700">{{ \Carbon\Carbon::parse($jadwal->jam_selesai)->format('H:i') }}</td> 
                             <td class="py-4 px-6 text-sm text-gray-700">{{ $jadwal->kegiatan }}</td>
                             <td class="py-4 px-6 text-center text-sm font-medium">
                                 <a href="{{ route('admin.jadwal.edit', $jadwal->id) }}" class="text-indigo-600 hover:text-indigo-800 transition mr-4"><i class="fas fa-edit mr-1"></i>Edit</a>
