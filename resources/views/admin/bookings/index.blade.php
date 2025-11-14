@@ -57,7 +57,14 @@
                         <tr class="hover:bg-gray-50 transition">
                             <td class="py-4 px-6 text-sm text-gray-800 font-medium">{{ $booking->user->name }}</td>
                             <td class="py-4 px-6 text-sm text-gray-700">{{ $booking->service->nama_layanan }}</td>
-                            <td class="py-4 px-6 text-sm text-gray-700">{{ $booking->jadwal->hari }}, {{ \Carbon\Carbon::parse($booking->jadwal->jam_mulai)->format('H:i') }}</td>
+                            <td class="py-4 px-6 text-sm text-gray-700">
+                            @if($booking->jadwal)
+                            {{ $booking->jadwal->hari }},
+                            {{ \Carbon\Carbon::parse($booking->jadwal->jam_mulai)->format('H:i') }}
+                            @else
+                            <span class="text-red-500">Jadwal tidak tersedia</span>
+                             @endif
+                            </td>
                             <td class="py-4 px-6 text-sm text-gray-700">{{ $booking->status }}</td>
                             <td class="py-4 px-6 text-center text-sm font-medium">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-800 transition">Detail</a>
